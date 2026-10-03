@@ -1,0 +1,29 @@
+# RayNeo / FFalcon glasses — USB access
+#
+# YOU PROBABLY DO NOT NEED THIS.
+#
+# The Decky plugin declares flags: ["root"] in plugin.json, so Decky Loader
+# starts it as root and it can open the glasses directly. Nothing is installed
+# into the system.
+#
+# These rules are only for running tools/rayneo_cli.py as the normal 'deck'
+# user, which is how you would verify the protocol without Decky:
+#
+#   sudo cp 99-rayneo.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules
+#   # then unplug and replug the glasses
+#
+# The vendor/product pairs come from the app's own UsbReceiver.isNormalDevice():
+#   (0x1BCB, 0xAF50)   older glasses
+#   (0x3941, 0xAF50)   current glasses (GT Max)
+#
+# Note the DFU (firmware-update) identity is 0x3941:0xAF51 -- one above the
+# normal PID. It is deliberately NOT granted here: we never want a diagnostic
+# script or the plugin to touch a device that is mid-upgrade.
+
+ACTION!="add|change", GOTO="rayneo_end"
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="1bcb", ATTR{idProduct}=="af50", MODE="0666", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTR{idVendor}=="3941", ATTR{idProduct}=="af50", MODE="0666", TAG+="uaccess"
+
+LABEL="rayneo_end"

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+
+# Decky / local
+*.zip
+.DS_Store
+
+# Debug switch state, written next to main.py at runtime.
+# Not part of the plugin; shipping it would ship somebody's preference.
+.debug.json

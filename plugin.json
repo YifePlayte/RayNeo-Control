@@ -1,0 +1,20 @@
+{
+  "name": "RayNeo Control",
+  "author": "YifePlayte",
+  "//flags": "root is required: the glasses appear as a raw USB device (mode 0664 root:root), so a plugin running as the 'deck' user cannot libusb_open() them (LIBUSB_ERROR_ACCESS). Decky Loader honours flags:[\"root\"] and starts the plugin as root, which removes the need for any udev rules. Verified against Decky Loader v3.2.10-pre1. | \"debug\" allows the plugin to be re-loaded while it is already running: loader.py refuses a second load unless the flag is set (\"has requested to not be re-loaded\"). It exists for reloading after a zip install without restarting Decky. It is not read anywhere else in the loader -- it does not enable any extra logging.",
+  "flags": [
+    "root",
+    "debug"
+  ],
+  "api_version": 1,
+  "publish": {
+    "tags": [
+      "rayneo",
+      "glasses",
+      "xr",
+      "usb"
+    ],
+    "description": "Control a connected RayNeo (FFalcon) XR display: brightness, 2D/3D, screen size, scene mode, HDR, colour enhance, volume, audio mode, audio tube.",
+    "image": "https://raw.githubusercontent.com/SteamDeckHomebrew/PluginLoader/main/assets/default.png"
+  }
+}
